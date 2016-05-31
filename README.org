@@ -1,0 +1,63 @@
+#+TITLE: Dicom-mode
+#+AUTHOR: Daniel Gomez
+
+**  Goal
+Dicom-mode is a minor mode that provides facilities to view better interact with DICOM
+images from within Emacs' image-mode.
+
+These facilities include:
+ - Interactively search for the value of a DICOM tag.
+ - Dump the DICOM header in a new buffer.
+ - Automatically create a publication-like protocol description.
+ - Infer protocol values not directly described in tags.
+ - Export all DICOMs in folder to a 4D nifti.
+
+** Keybindings
+
+| Keybindings | Description                          |
+| =C-c C-d=   | Dump header to *dicom-header* buffer |
+| =C-c C-i=   | Export DICOMs in folder to NifTI     |
+| =C-c C-s=   | Interactively search for a DICOM tag |
+
+** Installation 
+
+Dicom-mode is new and unstable, and therefore not yet available in MELPA. To
+install it simply put the files on your load path and add the following to your
+init.el file:
+
+#+BEGIN_SRC emacs-lisp
+;; Make image-mode play well with dicoms
+(setq image-file-name-extensions
+      (append '("dcm" "ima") image-file-name-extensions))
+
+(require 'dicom-mode)
+;; Automatically load dicom-mode when opening DICOMs.
+(add-to-list 'auto-mode-alist
+             '("\\.\\(dcm\\|DCM\\|ima\\|IMA\\)\\'"
+               . (lambda ()
+                   (image-mode)
+                   (dicom-mode))))
+#+END_SRC
+
+** Requirements
+
+Dicom-mode currently depends on [[http://dicom.offis.de/dcmtk.php.en][dcmtk]] for searching and retrieving header
+information, and on [[https://github.com/neurolabusc/dcm2niix][dcm2niix]] to create NifTI files. 
+For image-mode to work properly, Emacs needs to be compiled with ImageMagick support.
+
+For OS X users, dcmtk can be easily installed with ~brew install dcmtk~.
+
+** To do
+
+ Add more support for private vendor tags.
+ Expand Dicom-> Nifti facilities (choose filename and output folder)
+ Let user customize which tags to export, and what text to generate.
+ Add support to [[http://gdcm.sourceforge.net/wiki/index.php/Main_Page][GDCM]] in addition to dcmtk.
+ Add support for DICOM anonymization.
+ Import DICOM (or exported nifti) into an inferior Matlab or Python process.
+ Find alternative method to extract slice acceleration factor.
+
+** Disclaimer
+
+This minor-mode has been created to be mostly useful with MRI images, and in
+particular with fMRI data.
