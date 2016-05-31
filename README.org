@@ -49,15 +49,19 @@ For OS X users, dcmtk can be easily installed with ~brew install dcmtk~.
 
 ** To do
 
- Add more support for private vendor tags.
- Expand Dicom-> Nifti facilities (choose filename and output folder)
- Let user customize which tags to export, and what text to generate.
- Add support to [[http://gdcm.sourceforge.net/wiki/index.php/Main_Page][GDCM]] in addition to dcmtk.
- Add support for DICOM anonymization.
- Import DICOM (or exported nifti) into an inferior Matlab or Python process.
- Find alternative method to extract slice acceleration factor.
+ - Add more support for private vendor tags.
+ - Expand Dicom-> Nifti facilities (choose filename and output folder)
+ - Let user customize which tags to export, and what text to generate.
+ - Add support to [[http://gdcm.sourceforge.net/wiki/index.php/Main_Page][GDCM]] in addition to dcmtk.
+ - Add support for DICOM anonymization.
+ - Import DICOM (or exported nifti) into an inferior Matlab or Python process.
+ - Find alternative method to extract slice acceleration factor.
 
 ** Disclaimer
 
 This minor-mode has been created to be mostly useful with MRI images, and in
 particular with fMRI data.
+
+** License
+
+[[https://www.gnu.org/licenses/gpl-3.0.txt][GPLv3]].
